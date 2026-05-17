@@ -1943,7 +1943,6 @@ ${t.avoid}
 Составьте для меня индивидуальное меню на 1 день (завтрак, обед, ужин и 1–2 перекуса) по принципам традиционной медицины с учётом моей натуры. Каждое блюдо коротко обоснуйте: почему именно оно подходит моему типу (баланс температуры и влажности продуктов). Дайте практичные рецепты — не абстрактные «съешьте овощи», а конкретные блюда с примерным граммажом и способом приготовления.`;
 }
 
-function escapeHtml(s) { return s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
 
 function renderResult() {
   const t = result.type;
@@ -2054,6 +2053,15 @@ function renderResult() {
     v = v.slice(0, INPUT_LIMITS[k] || 100);
     return v;
   };
+  // Age range clamp on blur — strip out-of-range like 0 or 999
+  const clampAge = (v) => {
+    if (v === '') return '';
+    const n = parseInt(v, 10);
+    if (isNaN(n)) return '';
+    if (n < 5)   return '5';
+    if (n > 120) return '120';
+    return String(n);
+  };
   ['age','gender','activity','goal','allergies','season'].forEach(k => {
     const el = document.getElementById('p-' + k);
     if (el) {
@@ -2064,9 +2072,10 @@ function renderResult() {
         userParams[k] = clean;
       });
       el.addEventListener('blur', e => {
-        const trimmed = sanitize(k, e.target.value).trim();
-        if (trimmed !== e.target.value) e.target.value = trimmed;
-        userParams[k] = trimmed;
+        let val = sanitize(k, e.target.value).trim();
+        if (k === 'age') val = clampAge(val);
+        if (val !== e.target.value) e.target.value = val;
+        userParams[k] = val;
       });
     }
   });
@@ -2163,7 +2172,7 @@ function restart() {
   const params = new URLSearchParams(window.location.search);
   const demo = params.get('demo');
   if (!demo) return;
-  if (!TYPES[demo]) { console.warn('demo: unknown type', demo); return; }
+  if (!TYPES[demo]) { return; }
   // Build synthetic scores that produce the requested code.
   const temp = { Х: 0, О: 0, Г: 0 };
   const humid = { С: 0, О: 0, В: 0 };
