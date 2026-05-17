@@ -1,0 +1,2163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<meta name="theme-color" content="#F2EADC">
+
+<!-- ── Security headers via meta (GitHub Pages doesn't let us set HTTP headers directly) ── -->
+<!-- CSP whitelist: own origin + Google Fonts CSS/woff2; no fetch/XHR allowed; no framing -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=(), interest-cohort=()">
+
+<title>Найдите свою натуру</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light only;
+  --bg: #F2EADC;
+  --ink: #2A2520;
+  --muted: #5A4E40;
+  --brown: #8B6F4E;
+  --accent: #C66E4B;
+  --cream: #F2EADC;
+  --paper: #FFF9EE;
+  --paper-soft: rgba(255, 252, 245, 0.78);
+  --paper-strong: rgba(255, 252, 245, 0.94);
+  --border: rgba(139, 111, 78, 0.24);
+  --border-strong: rgba(139, 111, 78, 0.36);
+  --shadow: 0 24px 70px rgba(42, 37, 32, 0.10);
+  --shadow-soft: 0 12px 34px rgba(42, 37, 32, 0.08);
+  --radius-lg: 30px;
+  --radius-md: 22px;
+  --radius-sm: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root { color-scheme: light only; }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  min-height: 100%;
+  background: #F2EADC !important;
+  color-scheme: light only;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: #F2EADC !important;
+  background-image:
+    radial-gradient(circle at 14% 4%, rgba(198, 110, 75, 0.16) 0, transparent 34%),
+    radial-gradient(circle at 86% 10%, rgba(139, 111, 78, 0.10) 0, transparent 28%),
+    radial-gradient(circle at 50% 100%, rgba(201, 155, 58, 0.12) 0, transparent 38%);
+  color: #2A2520 !important;
+  -webkit-text-fill-color: #2A2520;
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  padding: clamp(18px, 4vw, 36px) 16px 42px;
+  position: relative;
+  overflow-x: hidden;
+  color-scheme: light only;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.23'/%3E%3C/svg%3E");
+  opacity: 0.33;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: multiply;
+}
+
+/* removed decorative half-moon ring */
+
+button,
+input {
+  font: inherit;
+  color: #2A2520 !important;
+  -webkit-text-fill-color: #2A2520;
+}
+
+button { -webkit-appearance: none; appearance: none; }
+
+.content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.screen {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255, 252, 245, 0.72), rgba(255, 248, 235, 0.42));
+  border: 1px solid rgba(139, 111, 78, 0.22);
+  border-radius: var(--radius-lg);
+  padding: clamp(26px, 6vw, 44px) clamp(18px, 5vw, 38px);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.screen::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(139, 111, 78, 0.13);
+  border-radius: calc(var(--radius-lg) - 10px);
+  pointer-events: none;
+}
+
+.header-mark,
+.progress-label,
+.card-label,
+.form-label,
+.result-code,
+.back-link,
+.btn-primary,
+.btn-ghost {
+  font-family: 'Manrope', sans-serif;
+  text-transform: uppercase;
+}
+
+.header-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 0.26em;
+  text-align: center;
+  color: #8B6F4E !important;
+  -webkit-text-fill-color: #8B6F4E;
+  margin-bottom: 10px;
+}
+
+.display-h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: clamp(42px, 10vw, 66px);
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+  text-align: center;
+  color: #2A2520 !important;
+  -webkit-text-fill-color: #2A2520;
+  max-width: 560px;
+  margin: 0 auto 10px;
+}
+
+.display-h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: #C66E4B !important;
+  -webkit-text-fill-color: #C66E4B;
+}
+
+.lead {
+  font-size: clamp(14px, 3.4vw, 16px);
+  line-height: 1.72;
+  color: #5A4E40 !important;
+  -webkit-text-fill-color: #5A4E40;
+  text-align: center;
+  max-width: 500px;
+  margin: 20px auto 28px;
+}
+
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 22px 0 6px;
+  color: #8B6F4E !important;
+  -webkit-text-fill-color: #8B6F4E;
+}
+
+.ornament-line {
+  flex: 1;
+  max-width: 72px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(139, 111, 78, 0.52), transparent);
+}
+
+.ornament-glyph {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  line-height: 1;
+  color: #C66E4B !important;
+  -webkit-text-fill-color: #C66E4B;
+}
+
+.feature-list {
+  margin: 28px 0 34px;
+  border-top: 1px solid rgba(139, 111, 78, 0.16);
+  border-bottom: 1px solid rgba(139, 111, 78, 0.16);
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 2px;
+  border-bottom: 1px solid rgba(139, 111, 78, 0.14);
+}
+
+.feature-item:last-child { border-bottom: none; }
+
+.feature-num {
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(198, 110, 75, 0.09);
+  border: 1px solid rgba(198, 110, 75, 0.20);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 21px;
+  line-height: 1;
+  color: #C66E4B !important;
+  -webkit-text-fill-color: #C66E4B;
+}
+
+.feature-text {
+  padding-top: 2px;
+  font-size: 14px;
+  line-height: 1.58;
+  color: #3A3228 !important;
+  -webkit-text-fill-color: #3A3228;
+}
+
+.progress-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.20em;
+  color: #8B6F4E !important;
+  -webkit-text-fill-color: #8B6F4E;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 7px;
+  overflow: hidden;
+  background: rgba(139, 111, 78, 0.14);
+  border: 1px solid rgba(139, 111, 78, 0.12);
+  border-radius: 999px;
+  margin-bottom: 30px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8B6F4E, #C66E4B);
+  border-radius: 999px;
+  transition: width 0.45s ease;
+}
+
+.question-block-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.3;
+  color: #8B6F4E !important;
+  -webkit-text-fill-color: #8B6F4E;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.question-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: clamp(27px, 7vw, 38px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: #2A2520 !important;
+  -webkit-text-fill-color: #2A2520;
+  text-align: center;
+  max-width: 560px;
+  margin: 12px auto 28px;
+}
+
+#options-container {
+  display: grid;
+  gap: 10px;
+}
+
+.answer-option {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 56px;
+  padding: 16px 18px 16px 20px;
+  margin: 0;
+  background: rgba(255, 252, 245, 0.78) !important;
+  border: 1px solid rgba(139, 111, 78, 0.23);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 8px 22px rgba(42, 37, 32, 0.045);
+  color: #2A2520 !important;
+  -webkit-text-fill-color: #2A2520;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.answer-option::after {
+  content: '→';
+  position: absolute;
+  right: 17px;
+  top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+  opacity: 0;
+  color: #F2EADC !important;
+  -webkit-text-fill-color: #F2EADC;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.answer-option:active {
+  background: #C66E4B !important;
+  color: #F2EADC !important;
+  -webkit-text-fill-color: #F2EADC !important;
+  border-color: #C66E4B;
+  transform: scale(0.99);
+}
+
+@media (hover: hover) {
+  .answer-option:hover {
+    background: #C66E4B !important;
+    color: #F2EADC !important;
+    -webkit-text-fill-color: #F2EADC !important;
+    border-color: #C66E4B;
+    box-shadow: 0 14px 32px rgba(198, 110, 75, 0.18);
+    transform: translateY(-2px);
+  }
+
+  .answer-option:hover::after {
+    opacity: 0.9;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+.btn-primary {
+  position: relative;
+  isolation: isolate;
+  display: block;
+  width: 100%;
+  padding: 18px 22px;
+  background: #2A2520 !important;
+  color: #F2EADC !important;
+  -webkit-text-fill-color: #F2EADC !important;
+  border: 1px solid #2A2520;
+  border-radius: 999px;
+  box-shadow: 0 16px 36px rgba(42, 37, 32, 0.18);
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.btn-primary:active {
+  background: #C66E4B !important;
+  color: #F2EADC !important;
+  -webkit-text-fill-color: #F2EADC !important;
+  border-color: #C66E4B;
+  transform: translateY(1px) scale(0.99);
+}
+
+.btn-primary:disabled {
+  cursor: default;
+  opacity: 0.78;
+  transform: none;
+}
+
+@media (hover: hover) {
+  .btn-primary:hover:not(:disabled) {
+    background: #C66E4B !important;
+    color: #F2EADC !important;
+    -webkit-text-fill-color: #F2EADC !important;
+    border-color: #C66E4B;
+    box-shadow: 0 18px 42px rgba(198, 110, 75, 0.26);
+    transform: translateY(-2px);
+  }
+}
+
+.btn-ghost {
+  display: inline-block;
+  padding: 12px 18px;
+  background: rgba(255, 252, 245, 0.44) !important;
+  color: #5A4E40 !important;
+  -webkit-text-fill-color: #5A4E40;
+  border: 1px solid rgba(139, 111, 78, 0.28);
+  border-radius: 999px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-ghost:active {
+  background: #2A2520 !important;
+  color: #F2EADC !important;
+  -webkit-text-fill-color: #F2EADC !important;
+  border-color: #2A2520;
+}
+
+@media (hover: hover) {
+  .btn-ghost:hover {
+    background: #2A2520 !important;
+    color: #F2EADC !important;
+    -webkit-text-fill-color: #F2EADC !important;
+    border-color: #2A2520;
+  }
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 16px;
+  padding: 10px 14px;
+  background: transparent !important;
+  border: none;
+  border-radius: 999px;
+  color: #8B6F4E !important;
+  -webkit-text-fill-color: #8B6F4E;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.back-link:active {
+  background: rgba(139, 111, 78, 0.10) !important;
+  color: #2A2520 !important;
+  -webkit-text-fill-color: #2A2520 !important;
+}
+
+.result-symbol {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 74px;
+  line-height: 1;
+  text-align: center;
+  color: #C66E4B !important;
+  -webkit-text-fill-color: #C66E4B;
+  margin: 20px 0 10px;
+}
+
+.result-symbol--big {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(128px, 38vw, 176px);
+  height: clamp(128px, 38vw, 176px);
+  margin: 20px auto 22px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255, 252, 245, 0.94) 0%, rgba(255, 252, 245, 0.52) 62%, rgba(198, 110, 75, 0.08) 100%);
+  border: 1px solid rgba(198, 110, 75, 0.24);
+  box-shadow: inset 0 0 0 10px rgba(255, 252, 245, 0.36), 0 18px 44px rgba(42, 37, 32, 0.08);
+  font-size: clamp(82px, 22vw, 112px);
+}
+
+.result-code {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.42em;
+  color: #8B6F4E !important;
+  -webkit-text-fill-color: #8B6F4E;
+  text-align: center;
+  margin: 28px 0 8px;
+}
+
+.result-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: clamp(38px, 9vw, 54px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #2A2520 !important;
+  -webkit-text-fill-color: #2A2520;
+  margin-bottom: 8px;
+}
+
+.result-poetic {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(18px, 4.5vw, 22px);
+  line-height: 1.25;
+  color: #C66E4B !important;
+  -webkit-text-fill-color: #C66E4B;
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.scores-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.score-box {
+  min-height: 82px;
+  padding: 14px 6px;
+  background: rgba(255, 252, 245, 0.58) !important;
+  border: 1px solid rgba(139, 111, 78, 0.20);
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(42, 37, 32, 0.035);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #2A2520 !important;
+  -webkit-text-fill-color: #2A2520;
+}
+
+.score-box.active {
+  background: #2A2520 !important;
+  color: #F2EADC !important;
+  -webkit-text-fill-color: #F2EADC !important;
+  border-color: #2A2520;
+  box-shadow: 0 12px 30px rgba(42, 37, 32, 0.16);
+}
+
+.score-letter {
+  max-width: 100%;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(17px, 4vw, 22px);
+  line-height: 1.02;
+  margin-bottom: 7px;
+  overflow-wrap: anywhere;
+  color: #2A2520 !important;
+  -webkit-text-fill-color: #2A2520;
+}
+
+.score-num {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #8B6F4E !important;
+  -webkit-text-fill-color: #8B6F4E;
+}
+
+.score-box.active .score-letter,
+.score-box.active .score-num {
+  color: #F2EADC !important;
+  -webkit-text-fill-color: #F2EADC !important;
+}
+
+.card {
+  position: relative;
+  background: rgba(255, 252, 245, 0.75) !important;
+  border: 1px solid rgba(139, 111, 78, 0.22);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  padding: 20px;
+  margin-bottom: 13px;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 18px;
+  bottom: 18px;
+  width: 3px;
+  border-radius: 999px;
+  background: rgba(198, 110, 75, 0.62);
+}
+
+.card-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: #8B6F4E !important;
+  -webkit-text-fill-color: #8B6F4E;
+  margin-bottom: 9px;
+}
+
+.card-text {
+  font-size: 14px;
+  line-height: 1.67;
+  color: #2A2520 !important;
+  -webkit-text-fill-color: #2A2520;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: clamp(28px, 7vw, 36px);
+  line-height: 1.05;
+  color: #2A2520 !important;
+  -webkit-text-fill-color: #2A2520;
+  margin: 34px 0 12px;
+}
+
+.params-form {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0 18px;
+}
+
+.form-group { margin-bottom: 0; }
+
+.form-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: #8B6F4E !important;
+  -webkit-text-fill-color: #8B6F4E;
+  margin-bottom: 6px;
+}
+
+.form-input {
+  width: 100%;
+  min-height: 50px;
+  padding: 13px 15px;
+  background: rgba(255, 252, 245, 0.86) !important;
+  border: 1px solid rgba(139, 111, 78, 0.26);
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  color: #2A2520 !important;
+  -webkit-text-fill-color: #2A2520;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-input::placeholder {
+  color: rgba(90, 78, 64, 0.58) !important;
+  -webkit-text-fill-color: rgba(90, 78, 64, 0.58);
+}
+
+.form-input:focus {
+  outline: none;
+  background: rgba(255, 252, 245, 0.98) !important;
+  border-color: rgba(198, 110, 75, 0.78);
+  box-shadow: 0 0 0 4px rgba(198, 110, 75, 0.10);
+}
+
+#type-details {
+  margin-top: 12px;
+}
+
+#menu-output .card { margin-top: 16px; }
+
+.fade-in { animation: fadeIn 0.42s cubic-bezier(0.22, 1, 0.36, 1); }
+
+/* ── Borrowed motion tokens (research from obys.agency, pomelo.la, mammothbrands.com) ── */
+/* All "borrowed" sites converge on two easings:                                          */
+/*   --ease-expo:     cubic-bezier(0.16, 1, 0.3, 1)   ~ 0.8-1.6s  for big poetic moves    */
+/*   --ease-material: cubic-bezier(0.4, 0, 0.2, 1)    ~ 0.35s     for UI swaps            */
+:root {
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-material: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── #1. Obys line-reveal — упрощённый: лёгкий fade+slide, без эффектов «вау» ── */
+.ln_ {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+}
+.ln {
+  display: inline-block;
+  transform: translateY(18px);
+  opacity: 0;
+  transition: transform 0.65s var(--ease-expo),
+              opacity 0.65s var(--ease-expo);
+  will-change: transform, opacity;
+}
+.is-revealed .ln {
+  transform: translateY(0);
+  opacity: 1;
+}
+.is-revealed .ln-d1 { transition-delay: 0.05s; }
+.is-revealed .ln-d2 { transition-delay: 0.15s; }
+.is-revealed .ln-d3 { transition-delay: 0.25s; }
+.is-revealed .ln-d4 { transition-delay: 0.35s; }
+.is-revealed .ln-d5 { transition-delay: 0.45s; }
+
+/* ── #2. Obys underline with origin-swap: draws L→R on hover, erases R→L ── */
+.answer-option {
+  position: relative;
+}
+.answer-option::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 8px;
+  height: 2px;
+  background: #C66E4B;
+  opacity: 0.85;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.7s var(--ease-expo);
+  pointer-events: none;
+}
+.answer-option:hover::after,
+.answer-option:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* ── #3. Pomelo panel-transition: clean cross-fade for revealType step ── */
+.panel-transition {
+  will-change: opacity, transform;
+  transition: opacity 0.42s var(--ease-material),
+              transform 0.42s var(--ease-material);
+}
+.panel-transition.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+}
+
+/* Reveal-in — мягкий, без blur и драмы */
+.reveal-in {
+  animation: revealIn 0.7s var(--ease-expo) both;
+}
+@keyframes revealIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal-in .result-type-icon { animation: revealIconIn 0.9s var(--ease-expo) 0.05s both; }
+.reveal-in .card             { animation: revealItemIn 0.7s var(--ease-expo) both; }
+.reveal-in .card:nth-of-type(1) { animation-delay: 0.45s; }
+.reveal-in .card:nth-of-type(2) { animation-delay: 0.55s; }
+.reveal-in .card:nth-of-type(3) { animation-delay: 0.65s; }
+.reveal-in .card:nth-of-type(4) { animation-delay: 0.75s; }
+@keyframes revealIconIn {
+  0%   { opacity: 0; transform: scale(0.85) translateY(8px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes revealItemIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hidden { display: none !important; }
+
+.footer-restart {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(139, 111, 78, 0.18);
+}
+
+@media (min-width: 620px) {
+  .params-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .form-group:nth-child(5),
+  .form-group:nth-child(6) { grid-column: span 2; }
+}
+
+@media (max-width: 420px) {
+  body { padding-left: 10px; padding-right: 10px; }
+  .screen { border-radius: 24px; padding: 24px 14px 28px; }
+  .screen::before { inset: 8px; border-radius: 18px; }
+  .answer-option { padding-right: 16px; }
+  .answer-option::after { display: none; }
+  .score-box { min-height: 76px; padding-left: 4px; padding-right: 4px; }
+  .score-letter { font-size: 17px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* --- Visual refinement v2 --- */
+.header-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.24em;
+  color: #7E6A56 !important;
+  -webkit-text-fill-color: #7E6A56 !important;
+}
+
+.header-mark--intro {
+  margin-bottom: 14px;
+}
+
+.header-mark--intro span:not(.header-mark-dot) {
+  white-space: nowrap;
+}
+
+.header-mark--panel {
+  display: inline-flex;
+  gap: 0;
+  margin: 0 auto 18px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(255, 252, 245, 0.78);
+  border: 1px solid rgba(139, 111, 78, 0.22);
+  box-shadow: 0 10px 26px rgba(42, 37, 32, 0.06);
+}
+
+.header-mark--panel span {
+  letter-spacing: 0.22em;
+}
+
+.header-mark-dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 999px;
+  background: #C66E4B;
+  box-shadow: 0 0 0 5px rgba(198, 110, 75, 0.10);
+}
+
+.display-h1 {
+  font-size: clamp(46px, 10.5vw, 70px);
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+}
+
+.lead {
+  font-size: clamp(14px, 3.5vw, 16px);
+  line-height: 1.78;
+  max-width: 510px;
+}
+
+.question-block-label {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.question-text {
+  font-size: clamp(28px, 7vw, 40px);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+.answer-option {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.feature-text,
+.card-text {
+  font-size: 15px;
+  line-height: 1.72;
+}
+
+.card-label,
+.form-label {
+  letter-spacing: 0.18em;
+}
+
+.section-title {
+  font-size: clamp(30px, 7vw, 38px);
+}
+
+.result-symbol {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.result-symbol--big {
+  position: relative;
+  isolation: isolate;
+  width: clamp(132px, 36vw, 160px);
+  height: clamp(132px, 36vw, 160px);
+  margin: 6px auto 26px;
+  border-radius: 34px;
+  background: linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(251, 245, 234, 0.88));
+  border: 1px solid rgba(139, 111, 78, 0.20);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.85), 0 18px 42px rgba(42, 37, 32, 0.08);
+  font-size: clamp(46px, 11vw, 64px);
+}
+
+.result-symbol--big::before,
+.result-symbol--big::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+.result-symbol--big::before {
+  inset: 12px;
+  border-radius: 24px;
+  border: 1px solid rgba(198, 110, 75, 0.30);
+}
+
+.result-symbol--big::after {
+  inset: 28px;
+  border-radius: 20px;
+  background: radial-gradient(circle, rgba(198, 110, 75, 0.12) 0%, rgba(198, 110, 75, 0.03) 42%, transparent 72%);
+}
+
+.result-code {
+  margin-top: 0;
+}
+
+.result-name {
+  font-size: clamp(40px, 9vw, 56px);
+  line-height: 0.96;
+}
+
+.result-poetic {
+  font-size: clamp(19px, 4.6vw, 23px);
+}
+
+@media (max-width: 420px) {
+  .header-mark {
+    gap: 10px;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+  }
+
+  .header-mark--panel {
+    padding: 9px 14px;
+    margin-bottom: 16px;
+  }
+
+  .feature-text,
+  .card-text {
+    font-size: 14px;
+    line-height: 1.68;
+  }
+
+  .result-symbol--big {
+    border-radius: 28px;
+  }
+}
+
+
+/* --- Visual refinement v3 --- */
+.result-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 4px 0 24px;
+}
+
+.result-top-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #C66E4B;
+  box-shadow: 0 0 0 7px rgba(198, 110, 75, 0.10);
+}
+
+.result-title-band {
+  width: min(100%, 420px);
+  min-height: 58px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px;
+  border-radius: 22px;
+  background: rgba(255, 252, 245, 0.82);
+  border: 1px solid rgba(139, 111, 78, 0.22);
+  box-shadow: 0 12px 28px rgba(42, 37, 32, 0.06);
+  font-family: "Manrope", sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #7E6A56 !important;
+  -webkit-text-fill-color: #7E6A56 !important;
+  text-align: center;
+}
+
+.result-name {
+  margin-top: 6px;
+}
+
+.result-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 22px 0 26px;
+}
+
+.result-meta-item {
+  padding: 14px 12px;
+  background: rgba(255, 252, 245, 0.72);
+  border: 1px solid rgba(139, 111, 78, 0.18);
+  border-radius: 18px;
+  box-shadow: 0 8px 22px rgba(42, 37, 32, 0.04);
+  text-align: center;
+}
+
+.result-meta-label {
+  margin-bottom: 7px;
+  font-family: "Manrope", sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8B6F4E !important;
+  -webkit-text-fill-color: #8B6F4E !important;
+}
+
+.result-meta-value {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(20px, 5vw, 26px);
+  font-weight: 500;
+  line-height: 1.02;
+  color: #2A2520 !important;
+  -webkit-text-fill-color: #2A2520 !important;
+}
+
+@media (max-width: 520px) {
+  .result-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .result-title-band {
+    min-height: 54px;
+    padding: 12px 18px;
+    font-size: 11px;
+    letter-spacing: 0.20em;
+  }
+}
+
+
+/* --- Visual refinement v4: premium result + quiz motion --- */
+html,
+body {
+  color-scheme: light only !important;
+}
+
+input,
+textarea,
+select,
+button {
+  color-scheme: light only !important;
+}
+
+#screen-result {
+  padding-top: clamp(28px, 6vw, 46px);
+}
+
+.result-top {
+  margin: 2px 0 26px;
+}
+
+.result-top-dot {
+  width: 13px;
+  height: 13px;
+  background: radial-gradient(circle at 35% 30%, #D48765 0%, #C66E4B 62%, #9B5139 100%);
+  box-shadow: 0 0 0 7px rgba(198, 110, 75, 0.10), 0 10px 24px rgba(198, 110, 75, 0.18);
+}
+
+.result-title-band {
+  width: min(100%, 470px);
+  min-height: 68px;
+  border-radius: 26px;
+  background:
+    linear-gradient(180deg, rgba(255, 252, 245, 0.94), rgba(249, 241, 226, 0.76)),
+    radial-gradient(circle at 50% 0%, rgba(198, 110, 75, 0.08), transparent 62%);
+  border-color: rgba(139, 111, 78, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    0 16px 38px rgba(42, 37, 32, 0.075);
+  font-size: 12px;
+  letter-spacing: 0.26em;
+}
+
+.result-type-icon {
+  width: 62px;
+  height: 62px;
+  margin: 4px auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 252, 245, 0.98), rgba(250, 241, 226, 0.86)),
+    radial-gradient(circle at 50% 50%, rgba(198, 110, 75, 0.12), transparent 66%);
+  border: 1px solid rgba(198, 110, 75, 0.28);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.55),
+    0 16px 34px rgba(42, 37, 32, 0.075);
+  color: #C66E4B !important;
+  -webkit-text-fill-color: #C66E4B !important;
+  animation: typeIconPop 680ms cubic-bezier(0.18, 1.25, 0.32, 1) 90ms both;
+  will-change: transform, opacity;
+}
+
+.result-type-icon span {
+  display: block;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 35px;
+  line-height: 1;
+  color: #C66E4B !important;
+  -webkit-text-fill-color: #C66E4B !important;
+}
+
+.result-name {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.result-combo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: clamp(22px, 5vw, 30px);
+  line-height: 1.3;
+  text-align: center;
+  color: #5A4E40 !important;
+  -webkit-text-fill-color: #5A4E40;
+  margin: 6px auto 28px;
+  letter-spacing: 0.01em;
+  max-width: 520px;
+}
+
+.result-combo-plus {
+  font-style: normal;
+  font-weight: 400;
+  color: #C66E4B !important;
+  -webkit-text-fill-color: #C66E4B;
+  margin: 0 6px;
+  font-size: 0.85em;
+  vertical-align: 2px;
+}
+
+.card {
+  background:
+    linear-gradient(180deg, rgba(255, 252, 245, 0.82), rgba(250, 243, 232, 0.64)) !important;
+}
+
+.card-label {
+  color: #866B4F !important;
+  -webkit-text-fill-color: #866B4F !important;
+}
+
+/* Question transition: next/back */
+#screen-quiz.quiz-slide-next .progress-label,
+#screen-quiz.quiz-slide-next .progress-bar,
+#screen-quiz.quiz-slide-next .question-block-label,
+#screen-quiz.quiz-slide-next .question-text,
+#screen-quiz.quiz-slide-next .back-link {
+  animation: quizSlideInNext 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform, opacity;
+}
+
+#screen-quiz.quiz-slide-back .progress-label,
+#screen-quiz.quiz-slide-back .progress-bar,
+#screen-quiz.quiz-slide-back .question-block-label,
+#screen-quiz.quiz-slide-back .question-text,
+#screen-quiz.quiz-slide-back .back-link {
+  animation: quizSlideInBack 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform, opacity;
+}
+
+#screen-quiz.quiz-exit-next .progress-label,
+#screen-quiz.quiz-exit-next .progress-bar,
+#screen-quiz.quiz-exit-next .question-block-label,
+#screen-quiz.quiz-exit-next .question-text,
+#screen-quiz.quiz-exit-next #options-container,
+#screen-quiz.quiz-exit-next .back-link {
+  animation: quizExitNext 190ms ease both;
+  pointer-events: none;
+}
+
+#screen-quiz.quiz-exit-back .progress-label,
+#screen-quiz.quiz-exit-back .progress-bar,
+#screen-quiz.quiz-exit-back .question-block-label,
+#screen-quiz.quiz-exit-back .question-text,
+#screen-quiz.quiz-exit-back #options-container,
+#screen-quiz.quiz-exit-back .back-link {
+  animation: quizExitBack 190ms ease both;
+  pointer-events: none;
+}
+
+.answer-option {
+  opacity: 0;
+  animation: answerStaggerIn 430ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--option-delay, 0ms);
+  will-change: transform, opacity;
+}
+
+.answer-option:disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+@keyframes quizSlideInNext {
+  from { opacity: 0; transform: translate3d(24px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes quizSlideInBack {
+  from { opacity: 0; transform: translate3d(-24px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes quizExitNext {
+  from { opacity: 1; transform: translate3d(0, 0, 0); }
+  to { opacity: 0; transform: translate3d(-18px, 0, 0); }
+}
+
+@keyframes quizExitBack {
+  from { opacity: 1; transform: translate3d(0, 0, 0); }
+  to { opacity: 0; transform: translate3d(18px, 0, 0); }
+}
+
+@keyframes answerStaggerIn {
+  from { opacity: 0; transform: translate3d(0, 10px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes typeIconPop {
+  0% { opacity: 0; transform: scale(0.78) rotate(-8deg) translate3d(0, 8px, 0); }
+  64% { opacity: 1; transform: scale(1.06) rotate(3deg) translate3d(0, -1px, 0); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg) translate3d(0, 0, 0); }
+}
+
+@media (max-width: 520px) {
+  .result-title-band {
+    min-height: 62px;
+    border-radius: 24px;
+  }
+
+  .result-type-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 20px;
+  }
+
+  .result-type-icon span {
+    font-size: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .answer-option,
+  .result-type-icon,
+  #screen-quiz.quiz-slide-next .progress-label,
+  #screen-quiz.quiz-slide-next .progress-bar,
+  #screen-quiz.quiz-slide-next .question-block-label,
+  #screen-quiz.quiz-slide-next .question-text,
+  #screen-quiz.quiz-slide-next .back-link,
+  #screen-quiz.quiz-slide-back .progress-label,
+  #screen-quiz.quiz-slide-back .progress-bar,
+  #screen-quiz.quiz-slide-back .question-block-label,
+  #screen-quiz.quiz-slide-back .question-text,
+  #screen-quiz.quiz-slide-back .back-link {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+
+/* --- Visual refinement v5: smoother motion + scale wording polish --- */
+.result-meta-label {
+  letter-spacing: 0.13em;
+}
+
+.result-meta-label span {
+  letter-spacing: 0;
+  -webkit-text-fill-color: initial;
+}
+
+#screen-quiz.quiz-slide-next .progress-label,
+#screen-quiz.quiz-slide-next .progress-bar,
+#screen-quiz.quiz-slide-next .question-block-label,
+#screen-quiz.quiz-slide-next .question-text,
+#screen-quiz.quiz-slide-next .back-link {
+  animation-duration: 620ms;
+  animation-timing-function: var(--ease-expo);
+  animation-fill-mode: both;
+}
+#screen-quiz.quiz-slide-next .progress-label    { animation-delay: 0ms; }
+#screen-quiz.quiz-slide-next .progress-bar      { animation-delay: 70ms; }
+#screen-quiz.quiz-slide-next .question-block-label { animation-delay: 140ms; }
+#screen-quiz.quiz-slide-next .question-text     { animation-delay: 220ms; }
+#screen-quiz.quiz-slide-next .back-link         { animation-delay: 680ms; }
+
+#screen-quiz.quiz-slide-back .progress-label,
+#screen-quiz.quiz-slide-back .progress-bar,
+#screen-quiz.quiz-slide-back .question-block-label,
+#screen-quiz.quiz-slide-back .question-text,
+#screen-quiz.quiz-slide-back .back-link {
+  animation-duration: 620ms;
+  animation-timing-function: var(--ease-expo);
+  animation-fill-mode: both;
+}
+#screen-quiz.quiz-slide-back .progress-label    { animation-delay: 0ms; }
+#screen-quiz.quiz-slide-back .progress-bar      { animation-delay: 70ms; }
+#screen-quiz.quiz-slide-back .question-block-label { animation-delay: 140ms; }
+#screen-quiz.quiz-slide-back .question-text     { animation-delay: 220ms; }
+#screen-quiz.quiz-slide-back .back-link         { animation-delay: 680ms; }
+
+#screen-quiz.quiz-exit-next .progress-label,
+#screen-quiz.quiz-exit-next .progress-bar,
+#screen-quiz.quiz-exit-next .question-block-label,
+#screen-quiz.quiz-exit-next .question-text,
+#screen-quiz.quiz-exit-next #options-container,
+#screen-quiz.quiz-exit-next .back-link {
+  animation-duration: 380ms;
+  animation-timing-function: var(--ease-material);
+}
+
+#screen-quiz.quiz-exit-back .progress-label,
+#screen-quiz.quiz-exit-back .progress-bar,
+#screen-quiz.quiz-exit-back .question-block-label,
+#screen-quiz.quiz-exit-back .question-text,
+#screen-quiz.quiz-exit-back #options-container,
+#screen-quiz.quiz-exit-back .back-link {
+  animation-duration: 380ms;
+  animation-timing-function: var(--ease-material);
+}
+
+.answer-option {
+  animation-duration: 560ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.result-type-icon {
+  animation-duration: 820ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes quizSlideInNextSoft {
+  from { opacity: 0; transform: translate3d(18px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes quizSlideInBackSoft {
+  from { opacity: 0; transform: translate3d(-18px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes quizExitNextSoft {
+  from { opacity: 1; transform: translate3d(0, 0, 0); }
+  to { opacity: 0; transform: translate3d(-12px, 0, 0); }
+}
+
+@keyframes quizExitBackSoft {
+  from { opacity: 1; transform: translate3d(0, 0, 0); }
+  to { opacity: 0; transform: translate3d(12px, 0, 0); }
+}
+
+@keyframes answerStaggerInSoft {
+  from { opacity: 0; transform: translate3d(0, 10px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes typeIconPopSoft {
+  from { opacity: 0; transform: scale(0.88) translate3d(0, 8px, 0); }
+  to { opacity: 1; transform: scale(1) translate3d(0, 0, 0); }
+}
+
+#screen-quiz.quiz-slide-next .progress-label,
+#screen-quiz.quiz-slide-next .progress-bar,
+#screen-quiz.quiz-slide-next .question-block-label,
+#screen-quiz.quiz-slide-next .question-text,
+#screen-quiz.quiz-slide-next .back-link {
+  animation-name: quizSlideInNextSoft;
+}
+
+#screen-quiz.quiz-slide-back .progress-label,
+#screen-quiz.quiz-slide-back .progress-bar,
+#screen-quiz.quiz-slide-back .question-block-label,
+#screen-quiz.quiz-slide-back .question-text,
+#screen-quiz.quiz-slide-back .back-link {
+  animation-name: quizSlideInBackSoft;
+}
+
+#screen-quiz.quiz-exit-next .progress-label,
+#screen-quiz.quiz-exit-next .progress-bar,
+#screen-quiz.quiz-exit-next .question-block-label,
+#screen-quiz.quiz-exit-next .question-text,
+#screen-quiz.quiz-exit-next #options-container,
+#screen-quiz.quiz-exit-next .back-link {
+  animation-name: quizExitNextSoft;
+}
+
+#screen-quiz.quiz-exit-back .progress-label,
+#screen-quiz.quiz-exit-back .progress-bar,
+#screen-quiz.quiz-exit-back .question-block-label,
+#screen-quiz.quiz-exit-back .question-text,
+#screen-quiz.quiz-exit-back #options-container,
+#screen-quiz.quiz-exit-back .back-link {
+  animation-name: quizExitBackSoft;
+}
+
+.answer-option {
+  animation-name: answerStaggerInSoft;
+  animation-duration: 520ms;
+  animation-timing-function: var(--ease-expo);
+  animation-fill-mode: both;
+  animation-delay: var(--option-delay, 0ms);
+}
+
+.result-type-icon {
+  animation-name: typeIconPopSoft;
+}
+
+@media (max-width: 520px) {
+  .result-meta-label {
+    letter-spacing: 0.11em;
+  }
+}
+
+</style>
+</head>
+<body>
+<div class="content">
+
+  <!-- ИНТРО -->
+  <div id="screen-intro" class="screen">
+    <div class="header-mark header-mark--intro"><span>Традиция</span><span class="header-mark-dot" aria-hidden="true"></span><span>Натура</span><span class="header-mark-dot" aria-hidden="true"></span><span>Питание</span></div>
+    <h1 class="display-h1">Найдите свою <em>натуру</em></h1>
+    <div class="ornament">
+      <div class="ornament-line"></div>
+      <span class="ornament-glyph">❀</span>
+      <div class="ornament-line"></div>
+    </div>
+    <p class="lead">
+      Короткий тест из 28 вопросов определит ваш тип по двум осям — температуре и влажности —
+      и подберёт индивидуальное меню на основе принципов традиционной медицины.
+    </p>
+
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="feature-num">I</div>
+        <div class="feature-text">Ответьте на 28 вопросов о теле, пищеварении, сне и темпераменте</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">II</div>
+        <div class="feature-text">Получите один из 9 типов натуры с характеристикой и рекомендациями</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">III</div>
+        <div class="feature-text">Получите индивидуальное меню по вашему типу и параметрам</div>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="startQuiz()">Начать тест →</button>
+  </div>
+
+  <!-- КВИЗ -->
+  <div id="screen-quiz" class="screen hidden">
+    <div class="progress-label" id="progress-label"></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    <div class="question-block-label" id="question-block"></div>
+    <h2 class="question-text" id="question-text"></h2>
+    <div id="options-container"></div>
+    <div style="text-align: center;">
+      <button class="back-link" id="back-btn" onclick="prevQuestion()">← Назад</button>
+    </div>
+  </div>
+
+  <!-- РЕЗУЛЬТАТ -->
+  <div id="screen-result" class="screen hidden"></div>
+
+</div>
+
+<script>
+// ============= ВОПРОСЫ =============
+const QUESTIONS = [
+  { id: 1, block: 'Ощущения тела и комфорт', scale: 'temp', text: 'Как Вы обычно ощущаете температуру своего тела?',
+    options: [
+      { t: 'Постоянно мёрзну, особенно руки, ноги, поясница', s: { Х: 3, О: 0, Г: 0 } },
+      { t: 'В целом комфортно, но в холодную погоду зябну', s: { Х: 1, О: 1, Г: 0 } },
+      { t: 'Мне нормально, не жарко и не холодно', s: { Х: 0, О: 3, Г: 0 } },
+      { t: 'Мне часто тепло, но без дискомфорта', s: { Х: 0, О: 1, Г: 1 } },
+      { t: 'Мне часто жарко, легко потею, ищу прохладу', s: { Х: 0, О: 0, Г: 3 } },
+    ]},
+  { id: 2, block: 'Ощущения тела и комфорт', scale: 'temp', text: 'Какая погода Вам наиболее комфортна?',
+    options: [
+      { t: 'Тёплая, солнечная, без ветра и сырости', s: { Х: 3, О: 0, Г: 0 } },
+      { t: 'Умеренно тёплая, «золотая осень»', s: { Х: 2, О: 1, Г: 0 } },
+      { t: 'Любая, легко адаптируюсь', s: { Х: 0, О: 3, Г: 0 } },
+      { t: 'Умеренно прохладная, свежая', s: { Х: 0, О: 1, Г: 2 } },
+      { t: 'Прохладная, люблю кондиционер, ветерок', s: { Х: 0, О: 0, Г: 3 } },
+    ]},
+  { id: 3, block: 'Ощущения тела и комфорт', scale: 'temp', text: 'Как реагируете на холодную пищу и напитки?',
+    options: [
+      { t: 'Сразу дискомфорт: спазм, вздутие, мёрзну', s: { Х: 3, О: 0, Г: 0 } },
+      { t: 'Могу немного, но лучше тёплое', s: { Х: 2, О: 1, Г: 0 } },
+      { t: 'Нормально, если не злоупотребляю', s: { Х: 0, О: 3, Г: 0 } },
+      { t: 'Люблю, освежает, без фанатизма', s: { Х: 0, О: 1, Г: 2 } },
+      { t: 'Обожаю, сразу легче от жара', s: { Х: 0, О: 0, Г: 3 } },
+    ]},
+  { id: 4, block: 'Ощущения тела и комфорт', scale: 'temp', text: 'Как переносите жару, душное помещение?',
+    options: [
+      { t: 'Очень тяжело: слабость, головокружение', s: { Х: 3, О: 0, Г: 0 } },
+      { t: 'Неприятно, но терплю, избегаю', s: { Х: 2, О: 1, Г: 0 } },
+      { t: 'Нормально, если есть вода и вентиляция', s: { Х: 0, О: 3, Г: 0 } },
+      { t: 'Дискомфортно, но быстро привыкаю', s: { Х: 0, О: 1, Г: 2 } },
+      { t: 'Легко, почти не замечаю, люблю тепло', s: { Х: 0, О: 0, Г: 3 } },
+    ]},
+  { id: 5, block: 'Ощущения тела и комфорт', scale: 'temp', text: 'Какая одежда вам комфортна?',
+    options: [
+      { t: 'Тёплая, многослойная, всегда с шарфом', s: { Х: 3, О: 0, Г: 0 } },
+      { t: 'Предпочитаю тепло, но могу легче', s: { Х: 2, О: 1, Г: 0 } },
+      { t: 'Одеваюсь по погоде, без предпочтений', s: { Х: 0, О: 3, Г: 0 } },
+      { t: 'Люблю лёгкие ткани', s: { Х: 0, О: 1, Г: 2 } },
+      { t: 'Минимум одежды, дышащие ткани', s: { Х: 0, О: 0, Г: 3 } },
+    ]},
+  { id: 6, block: 'Пищеварение и аппетит', scale: 'temp', text: 'Какая пища лучше усваивается?',
+    options: [
+      { t: 'Тёплая, горячая, наваристая: супы, рагу, каши', s: { Х: 3, О: 0, Г: 0 } },
+      { t: 'Предпочитаю тёплое, но можно комнатной', s: { Х: 2, О: 1, Г: 0 } },
+      { t: 'Любое, главное свежее и качественное', s: { Х: 0, О: 3, Г: 0 } },
+      { t: 'И тёплое, и прохладное (салаты, фрукты)', s: { Х: 0, О: 1, Г: 2 } },
+      { t: 'Лёгкое, свежее, охлаждённое', s: { Х: 0, О: 0, Г: 3 } },
+    ]},
+  { id: 7, block: 'Пищеварение и аппетит', scale: 'temp', text: 'Как реагируете на острые специи (имбирь, перец, корица)?',
+    options: [
+      { t: 'Люблю, чувствую прилив сил и тепла', s: { Х: 3, О: 0, Г: 0 } },
+      { t: 'Нравится в меру, но острое — дискомфорт', s: { Х: 2, О: 1, Г: 0 } },
+      { t: 'Нормально, использую по вкусу', s: { Х: 0, О: 3, Г: 0 } },
+      { t: 'Могу есть, но иногда много', s: { Х: 0, О: 1, Г: 2 } },
+      { t: 'Избегаю: усиливают жар и раздражение', s: { Х: 0, О: 0, Г: 3 } },
+    ]},
+  { id: 8, block: 'Пищеварение и аппетит', scale: 'temp', text: 'Что чувствуете после плотного ужина?',
+    options: [
+      { t: 'Тепло, сытость, спокойствие, хорошо сплю', s: { Х: 3, О: 0, Г: 0 } },
+      { t: 'Сытость, но если переем — тяжесть', s: { Х: 2, О: 1, Г: 0 } },
+      { t: 'Нормально, если не переедаю', s: { Х: 0, О: 3, Г: 0 } },
+      { t: 'Тяжесть, иногда трудно уснуть', s: { Х: 0, О: 1, Г: 2 } },
+      { t: 'Тяжесть, жар, беспокойный сон, жажда', s: { Х: 0, О: 0, Г: 3 } },
+    ]},
+  { id: 9, block: 'Энергия и эмоции', scale: 'temp', text: 'Какой у вас тип энергии в течение дня?',
+    options: [
+      { t: 'Фоновая, нужно время на раскачку, к вечеру устаю', s: { Х: 3, О: 0, Г: 0 } },
+      { t: 'Стабильная, к вечеру может снижаться', s: { Х: 2, О: 1, Г: 0 } },
+      { t: 'Ровная, хватает на весь день', s: { Х: 0, О: 3, Г: 0 } },
+      { t: 'Хорошая, иногда избыток активности', s: { Х: 0, О: 1, Г: 2 } },
+      { t: 'Высокая, гиперактивность, трудно «выключиться»', s: { Х: 0, О: 0, Г: 3 } },
+    ]},
+  { id: 10, block: 'Энергия и эмоции', scale: 'temp', text: 'Как реагируете на стресс?',
+    options: [
+      { t: 'Тревожность, беспокойство, желание сжаться', s: { Х: 3, О: 0, Г: 0 } },
+      { t: 'Лёгкое беспокойство, но беру себя в руки', s: { Х: 2, О: 1, Г: 0 } },
+      { t: 'Спокойно, рационально, восстанавливаюсь', s: { Х: 0, О: 3, Г: 0 } },
+      { t: 'Лёгкое раздражение, без вспышек', s: { Х: 0, О: 1, Г: 2 } },
+      { t: 'Раздражительность, гнев, желание спорить', s: { Х: 0, О: 0, Г: 3 } },
+    ]},
+  { id: 11, block: 'Энергия и эмоции', scale: 'temp', text: 'Какой у вас темперамент в общении?',
+    options: [
+      { t: 'Спокойный, сдержанный, не люблю шумные компании', s: { Х: 3, О: 0, Г: 0 } },
+      { t: 'Дружелюбный, но предпочитаю небольшие группы', s: { Х: 2, О: 1, Г: 0 } },
+      { t: 'Уравновешенный, легко общаюсь с разными', s: { Х: 0, О: 3, Г: 0 } },
+      { t: 'Активный, люблю общение, могу и побыть один', s: { Х: 0, О: 1, Г: 2 } },
+      { t: 'Яркий, экспрессивный, в центре внимания', s: { Х: 0, О: 0, Г: 3 } },
+    ]},
+  { id: 12, block: 'Сон и восстановление', scale: 'temp', text: 'Как засыпаете?',
+    options: [
+      { t: 'Долго, мысли крутятся, мёрзну под одеялом', s: { Х: 3, О: 0, Г: 0 } },
+      { t: 'Нормально, но если переволновался — трудно', s: { Х: 2, О: 1, Г: 0 } },
+      { t: 'Легко, сплю крепко', s: { Х: 0, О: 3, Г: 0 } },
+      { t: 'Быстро, но иногда сон поверхностный', s: { Х: 0, О: 1, Г: 2 } },
+      { t: 'Легко, но ворочаюсь от жары, сбрасываю одеяло', s: { Х: 0, О: 0, Г: 3 } },
+    ]},
+  { id: 13, block: 'Сон и восстановление', scale: 'temp', text: 'Как просыпаетесь утром?',
+    options: [
+      { t: 'Трудно, нужно тёплое питьё чтобы «завестись»', s: { Х: 3, О: 0, Г: 0 } },
+      { t: 'Нормально, но если поздно лёг — тяжело', s: { Х: 2, О: 1, Г: 0 } },
+      { t: 'Легко, с ощущением отдыха', s: { Х: 0, О: 3, Г: 0 } },
+      { t: 'Легко, иногда слишком рано', s: { Х: 0, О: 1, Г: 2 } },
+      { t: 'Очень легко, до будильника с ощущением жара', s: { Х: 0, О: 0, Г: 3 } },
+    ]},
+  { id: 14, block: 'Физические признаки', scale: 'temp', text: 'Как выглядят руки и ноги в прохладном помещении?',
+    options: [
+      { t: 'Холодные, бледные, иногда с синеватым оттенком', s: { Х: 3, О: 0, Г: 0 } },
+      { t: 'Прохладные, но быстро согреваются', s: { Х: 2, О: 1, Г: 0 } },
+      { t: 'Нормальной температуры', s: { Х: 0, О: 3, Г: 0 } },
+      { t: 'Тёплые, иногда чуть горячее тела', s: { Х: 0, О: 1, Г: 2 } },
+      { t: 'Горячие, часто потеют ладони и стопы', s: { Х: 0, О: 0, Г: 3 } },
+    ]},
+  { id: 15, block: 'Физические признаки', scale: 'temp', text: 'Как переносите голод (пропуск приёма пищи)?',
+    options: [
+      { t: 'Очень тяжело: слабость, дрожь, холод', s: { Х: 3, О: 0, Г: 0 } },
+      { t: 'Неприятно, но терплю несколько часов', s: { Х: 2, О: 1, Г: 0 } },
+      { t: 'Нормально, если не затягивать', s: { Х: 0, О: 3, Г: 0 } },
+      { t: 'Могу пропустить, потом сильный аппетит', s: { Х: 0, О: 1, Г: 2 } },
+      { t: 'Легко, аппетит может «проснуться» резко', s: { Х: 0, О: 0, Г: 3 } },
+    ]},
+  { id: 16, block: 'Кожа и слизистые', scale: 'humid', text: 'Как описываете состояние своей кожи?',
+    options: [
+      { t: 'Сухая, шелушится, требует постоянного увлажнения', s: { С: 3, О: 0, В: 0 } },
+      { t: 'Склонна к сухости, особенно зимой', s: { С: 2, О: 1, В: 0 } },
+      { t: 'Нормальная, без особых проблем', s: { С: 0, О: 3, В: 0 } },
+      { t: 'Иногда жирный блеск в Т-зоне', s: { С: 0, О: 1, В: 2 } },
+      { t: 'Жирная, склонна к акне, расширенным порам', s: { С: 0, О: 0, В: 3 } },
+    ]},
+  { id: 17, block: 'Кожа и слизистые', scale: 'humid', text: 'Есть ли ощущение сухости (глаза, рот, нос)?',
+    options: [
+      { t: 'Да, постоянно: сухие глаза, жажда, сухость в носу', s: { С: 3, О: 0, В: 0 } },
+      { t: 'Бывает, в отопительный сезон или при стрессе', s: { С: 2, О: 1, В: 0 } },
+      { t: 'Редко, только при болезни', s: { С: 0, О: 3, В: 0 } },
+      { t: 'Иногда, но быстро проходит', s: { С: 0, О: 1, В: 2 } },
+      { t: 'Практически нет, скорее наоборот — слизь', s: { С: 0, О: 0, В: 3 } },
+    ]},
+  { id: 18, block: 'Кожа и слизистые', scale: 'humid', text: 'Как обстоят дела с выделениями (пот, слизь)?',
+    options: [
+      { t: 'Минимум: сухая кожа, мало пота', s: { С: 3, О: 0, В: 0 } },
+      { t: 'Умеренно, в пределах нормы', s: { С: 0, О: 3, В: 0 } },
+      { t: 'Повышенное: потливость, слизь, обильные выделения', s: { С: 0, О: 0, В: 3 } },
+    ]},
+  { id: 19, block: 'Пищеварение и стул', scale: 'humid', text: 'Какой у вас обычно стул?',
+    options: [
+      { t: 'Сухой, твёрдый, бывает запор', s: { С: 3, О: 0, В: 0 } },
+      { t: 'Оформленный, но иногда суховат', s: { С: 2, О: 1, В: 0 } },
+      { t: 'Регулярный, оформленный', s: { С: 0, О: 3, В: 0 } },
+      { t: 'Мягкий, иногда учащённый', s: { С: 0, О: 1, В: 2 } },
+      { t: 'Кашицеобразный, бывает диарея', s: { С: 0, О: 0, В: 3 } },
+    ]},
+  { id: 20, block: 'Пищеварение и стул', scale: 'humid', text: 'Как переносите жирную, маслянистую пищу?',
+    options: [
+      { t: 'Люблю, чувствую себя лучше, кожа увлажняется', s: { С: 3, О: 0, В: 0 } },
+      { t: 'Нормально, в меру', s: { С: 0, О: 3, В: 0 } },
+      { t: 'Тяжело: тошнота, тяжесть, усиление слизи', s: { С: 0, О: 0, В: 3 } },
+    ]},
+  { id: 21, block: 'Пищеварение и стул', scale: 'humid', text: 'Есть ли вздутие, газообразование?',
+    options: [
+      { t: 'Да, часто, особенно после сырых овощей, бобовых', s: { С: 3, О: 0, В: 0 } },
+      { t: 'Иногда, если переем или съем непривычное', s: { С: 2, О: 1, В: 0 } },
+      { t: 'Редко, пищеварение стабильное', s: { С: 0, О: 3, В: 0 } },
+      { t: 'Бывает после тяжёлой пищи', s: { С: 0, О: 1, В: 2 } },
+      { t: 'Часто, ощущение тяжести, брожения, слизи', s: { С: 0, О: 0, В: 3 } },
+    ]},
+  { id: 22, block: 'Вес и телосложение', scale: 'humid', text: 'Какое у Вас телосложение?',
+    options: [
+      { t: 'Худощавое, трудно набрать вес, тонкая кожа', s: { С: 3, О: 0, В: 0 } },
+      { t: 'Стройное, с небольшими запасами', s: { С: 2, О: 1, В: 0 } },
+      { t: 'Пропорциональное, вес стабильный', s: { С: 0, О: 3, В: 0 } },
+      { t: 'Плотное, есть запасы в проблемных зонах', s: { С: 0, О: 1, В: 2 } },
+      { t: 'Склонность к полноте, отёчности', s: { С: 0, О: 0, В: 3 } },
+    ]},
+  { id: 23, block: 'Вес и телосложение', scale: 'humid', text: 'Как Вы набираете и теряете вес?',
+    options: [
+      { t: 'Трудно набираю, легко теряю (иногда слишком)', s: { С: 3, О: 0, В: 0 } },
+      { t: 'Вес меняется, но в целом контролирую', s: { С: 2, О: 1, В: 0 } },
+      { t: 'Вес стабильный, легко возвращаю норму', s: { С: 0, О: 3, В: 0 } },
+      { t: 'Легко набираю, сбрасываю с умеренным усилием', s: { С: 0, О: 1, В: 2 } },
+      { t: 'Очень легко набираю, трудно сбрасываю, вес «стоит»', s: { С: 0, О: 0, В: 3 } },
+    ]},
+  { id: 24, block: 'Вес и телосложение', scale: 'humid', text: 'Есть ли у Вас отёчность?',
+    options: [
+      { t: 'Нет, скорее обезвоженность, сухость тканей', s: { С: 3, О: 0, В: 0 } },
+      { t: 'Иногда, если пересолил(а) или много пил(а) на ночь', s: { С: 2, О: 1, В: 0 } },
+      { t: 'Практически нет', s: { С: 0, О: 3, В: 0 } },
+      { t: 'Бывает утром (лицо) или к вечеру (ноги), но проходит', s: { С: 0, О: 1, В: 2 } },
+      { t: 'Часто: отёки лица, рук, ног, особенно утром', s: { С: 0, О: 0, В: 3 } },
+    ]},
+  { id: 25, block: 'Дыхание и лёгкие', scale: 'humid', text: 'Есть ли у Вас склонность к сухому кашлю, першению в горле?',
+    options: [
+      { t: 'Да, часто: сухой кашель, першение, трудно откашляться', s: { С: 3, О: 0, В: 0 } },
+      { t: 'Бывает при простуде или сухом воздухе', s: { С: 2, О: 1, В: 0 } },
+      { t: 'Редко', s: { С: 0, О: 3, В: 0 } },
+      { t: 'Иногда с мокротой', s: { С: 0, О: 1, В: 2 } },
+      { t: 'Часто: влажный кашель, много мокроты, заложенность', s: { С: 0, О: 0, В: 3 } },
+    ]},
+  { id: 26, block: 'Дыхание и лёгкие', scale: 'humid', text: 'Как Вы переносите сырость, дождливую погоду?',
+    options: [
+      { t: 'Нормально, если тепло одет(а)', s: { С: 2, О: 1, В: 0 } },
+      { t: 'Нейтрально', s: { С: 0, О: 3, В: 0 } },
+      { t: 'Тяжело: усиливается слизь, отёчность, тяжесть в теле', s: { С: 0, О: 0, В: 3 } },
+    ]},
+  { id: 27, block: 'Общее самочувствие и цикличность', scale: 'humid', text: 'Насколько стабильны Ваши симптомы и самочувствие?',
+    options: [
+      { t: 'Есть постоянные «фоновые» признаки (сухость, зябкость)', s: { С: 3, Х: 3, О: 0, В: 0, Г: 0 } },
+      { t: 'В целом стабильно, но есть сезонные колебания', s: { С: 0, О: 2, В: 0 } },
+      { t: 'Очень стабильно, редко болею, самочувствие ровное', s: { С: 0, О: 3, В: 0 } },
+      { t: 'Бывают периоды ухудшения, но быстро восстанавливаюсь', s: { С: 0, О: 2, В: 0 } },
+      { t: 'Симптомы то появляются, то исчезают, трудно предсказать', s: { С: 0, О: 0, В: 3 } },
+    ]},
+  { id: 28, block: 'Общее самочувствие и цикличность', scale: 'humid', text: 'Как Вы реагируете на изменение режима (поздний отбой, пропуск еды)?',
+    options: [
+      { t: 'Очень чувствительно: сразу сухость, тревога, сбой пищеварения', s: { С: 3, О: 0, В: 0 } },
+      { t: 'Замечаю, но быстро возвращаюсь в норму', s: { С: 2, О: 1, В: 0 } },
+      { t: 'Нормально, если не злоупотреблять', s: { С: 0, О: 3, В: 0 } },
+      { t: 'Могу адаптироваться, но потом нужна «перезагрузка»', s: { С: 0, О: 1, В: 2 } },
+      { t: 'Легко сбиваюсь: отёки, тяжесть, слизь, трудно вернуться в ритм', s: { С: 0, О: 0, В: 3 } },
+    ]},
+];
+
+// ============= ТИПЫ =============
+const TYPES = {
+  'ХС': { name: 'Холодный Сухой', symbol: '◇', poetic: 'Ветер по сухой земле',
+    desc: 'Лёгкость и подвижность ума, но склонность к зябкости, сухости кожи, нестабильному пищеварению. Энергия фоновая, нужна постоянная подпитка теплом и влагой.',
+    needs: 'Согревать и увлажнять. Тёплая, маслянистая, питательная пища. Регулярность.',
+    good: 'Тёплые супы, тушёные блюда, каши на молоке, топлёное масло, орехи, мёд, финики, корица, имбирь, кардамон, баранина, говядина, лосось, авокадо, яйца всмятку, варёные овощи',
+    avoid: 'Сырые холодные салаты, ледяные напитки, газировка, сухая выпечка, попкорн, сухофрукты без замачивания, бобовые без специй, кофе натощак, сырые крестоцветные' },
+  'ХО': { name: 'Холодный Гармоничный', symbol: '○', poetic: 'Прохладный родник в тени',
+    desc: 'Холод преобладает, но влажность в балансе. Спокойный, выносливый, но требуется согревание для активности.',
+    needs: 'Согревать без пересушивания. Тёплая, умеренно влажная пища, согревающие специи.',
+    good: 'Каши, тушёное мясо, рыба, корнеплоды, тыква, печёные яблоки, имбирный чай, корица, гвоздика, чёрный перец, лук, чеснок, оливковое масло',
+    avoid: 'Холодные напитки, мороженое, сырые овощи в большом количестве, охлаждённые молочные продукты' },
+  'ХВ': { name: 'Холодный Влажный', symbol: '◐', poetic: 'Туман над болотом',
+    desc: 'Спокойствие, выносливость, но склонность к застою — лишний вес, отёчность, слизь, медлительность.',
+    needs: 'Согревать и подсушивать. Лёгкая, тёплая, островатая пища.',
+    good: 'Лёгкие супы с имбирём, перцем, чили; курица, индейка, печёная рыба, гречка, киноа, листовая зелень, редис, репа, чёрный перец, горчица, мёд (умеренно), травяные чаи',
+    avoid: 'Молочные продукты в большом количестве, сахар, мучное, бананы, дыня, свинина, холодные сладкие напитки, тяжёлые жирные блюда' },
+  'ОС': { name: 'Сухой Гармоничный', symbol: '◑', poetic: 'Камень в полдень',
+    desc: 'Температура в норме, но не хватает влаги. Сухость кожи, ломкость волос, склонность к запорам.',
+    needs: 'Увлажнять без перегрева. Сочные, маслянистые продукты комнатной температуры.',
+    good: 'Авокадо, оливковое масло, кунжут, тахини, варёные крупы с маслом, тушёные овощи, кабачки, спелые сладкие фрукты, гхи, рыба, молочные продукты (если переносите)',
+    avoid: 'Сухие продукты без жидкости, попкорн, крекеры, избыток жареного, алкоголь, кофеин в избытке' },
+  'ОО': { name: 'Полностью Гармоничный', symbol: '●', poetic: 'Дерево в равновесии',
+    desc: 'Редкий идеальный баланс. Задача — поддерживать его сезонной и разумной пищей.',
+    needs: 'Поддерживать баланс. Разнообразная, сезонная, цельная пища.',
+    good: 'Сезонные овощи и фрукты, цельные злаки, разные виды белка, умеренное количество масел, специй по вкусу, ферментированные продукты',
+    avoid: 'Крайностей: избытка холодного, горячего, сухого, влажного. Полуфабрикатов, рафинированных продуктов' },
+  'ОВ': { name: 'Влажный Гармоничный', symbol: '◕', poetic: 'Утренняя роса',
+    desc: 'Температура в норме, но избыток влаги. Склонность к слизи, тяжести, медленному пищеварению.',
+    needs: 'Подсушивать без согревания. Лёгкая, нежирная пища, горьковатые и вяжущие вкусы.',
+    good: 'Зелёные листовые овощи, спаржа, артишок, гречка, киноа, рыба, белое мясо, ягоды, гранат, цикорий, зелёный чай, лимон, куркума, тмин',
+    avoid: 'Молочное в избытке, сахар, мучное, жирное, бананы, манго, тяжёлые сладкие десерты' },
+  'ГС': { name: 'Жаркий Сухой', symbol: '◈', poetic: 'Огонь в пустыне',
+    desc: 'Острый ум, сильная воля, но склонность к раздражительности, воспалениям, сухости, изжоге.',
+    needs: 'Охлаждать и увлажнять. Сладкие, горькие, вяжущие вкусы. Прохладная, сочная пища.',
+    good: 'Свежие овощи (огурец, кабачок, листовая зелень), сладкие фрукты, кокос, авокадо, рис, овсянка на воде, молочные продукты (если переносите), кориандр, мята, фенхель, прохладная вода с лимоном',
+    avoid: 'Острые специи (перец чили, чёрный перец в избытке), жареное, алкоголь, кофе, ферментированные острые продукты, помидоры в большом количестве, кислые цитрусовые' },
+  'ГО': { name: 'Жаркий Гармоничный', symbol: '◓', poetic: 'Солнце сквозь листву',
+    desc: 'Жар преобладает, но влажность в балансе. Энергичный, активный, склонен к перегреву.',
+    needs: 'Охлаждать без увлажнения сверх меры. Свежая, прохладная пища, успокаивающие травы.',
+    good: 'Зелёные салаты, огурцы, сельдерей, мята, базилик, кинза, ягоды, рис, ячмень, белое мясо, рыба, охлаждённые компоты без сахара',
+    avoid: 'Острое, жареное, алкоголь, избыток специй, кофе натощак, горячие пряные блюда' },
+  'ГВ': { name: 'Жаркий Влажный', symbol: '◉', poetic: 'Парная баня',
+    desc: 'Энергия и страсть, но склонность к воспалениям с отёками, кожным высыпаниям, тяжести.',
+    needs: 'Охлаждать и подсушивать. Лёгкая, прохладная, горьковатая пища.',
+    good: 'Горькая зелень (руккола, цикорий, шпинат), огурцы, спаржа, ягоды, гранат, цитрусовые (умеренно), белое мясо, рыба, гречка, киноа, куркума, кориандр, зелёный чай',
+    avoid: 'Жирное, жареное, сладкое, молочное в избытке, алкоголь, острое, тяжёлые красные сорта мяса, мучное' },
+};
+
+// ============= ЛОГИКА =============
+let currentQ = 0;
+let answers = {};
+let result = null;
+let userParams = { age: '', gender: '', activity: '', goal: '', allergies: '', season: '' };
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+  const screen = document.getElementById('screen-' + id);
+  screen.classList.remove('hidden');
+  screen.classList.remove('fade-in');
+  void screen.offsetWidth;
+  screen.classList.add('fade-in');
+  window.scrollTo(0, 0);
+}
+
+function startQuiz() {
+  currentQ = 0;
+  answers = {};
+  showScreen('quiz');
+  renderQuestion();
+}
+
+function renderQuestion(direction = 'next') {
+  const q = QUESTIONS[currentQ];
+  document.getElementById('progress-label').textContent = `Вопрос ${currentQ + 1} из ${QUESTIONS.length}`;
+  document.getElementById('progress-fill').style.width = `${((currentQ + 1) / QUESTIONS.length) * 100}%`;
+  document.getElementById('question-block').textContent = '— ' + q.block + ' —';
+  document.getElementById('question-text').textContent = q.text;
+
+  const container = document.getElementById('options-container');
+  container.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'answer-option';
+    btn.style.setProperty('--option-delay', `${300 + i * 95}ms`);
+    btn.textContent = opt.t;
+    btn.onclick = () => selectAnswer(i);
+    container.appendChild(btn);
+  });
+
+  document.getElementById('back-btn').style.display = currentQ > 0 ? 'inline-block' : 'none';
+
+  const screen = document.getElementById('screen-quiz');
+  screen.classList.remove('fade-in', 'quiz-slide-next', 'quiz-slide-back', 'quiz-exit-next', 'quiz-exit-back');
+  void screen.offsetWidth;
+  screen.classList.add(direction === 'back' ? 'quiz-slide-back' : 'quiz-slide-next');
+}
+
+function selectAnswer(i) {
+  answers[QUESTIONS[currentQ].id] = QUESTIONS[currentQ].options[i];
+
+  document.querySelectorAll('.answer-option').forEach(btn => {
+    btn.disabled = true;
+  });
+
+  const screen = document.getElementById('screen-quiz');
+  screen.classList.remove('quiz-slide-next', 'quiz-slide-back', 'quiz-exit-next', 'quiz-exit-back');
+  screen.classList.add('quiz-exit-next');
+
+  if (currentQ < QUESTIONS.length - 1) {
+    setTimeout(() => { currentQ++; renderQuestion('next'); }, 320);
+  } else {
+    setTimeout(() => {
+      calculateResult();
+      renderResult();
+      showScreen('result');
+    }, 320);
+  }
+}
+
+function prevQuestion() {
+  if (currentQ > 0) {
+    const screen = document.getElementById('screen-quiz');
+    screen.classList.remove('quiz-slide-next', 'quiz-slide-back', 'quiz-exit-next', 'quiz-exit-back');
+    screen.classList.add('quiz-exit-back');
+    setTimeout(() => { currentQ--; renderQuestion('back'); }, 320);
+  }
+}
+
+function calculateResult() {
+  const temp = { Х: 0, О: 0, Г: 0 };
+  const humid = { С: 0, О: 0, В: 0 };
+  Object.values(answers).forEach(opt => {
+    Object.entries(opt.s).forEach(([k, v]) => {
+      if (k in temp) temp[k] += v;
+      if (k in humid) humid[k] += v;
+    });
+  });
+  const tWin = Object.entries(temp).sort((a, b) => b[1] - a[1])[0][0];
+  const hWin = Object.entries(humid).sort((a, b) => b[1] - a[1])[0][0];
+  const code = tWin + hWin;
+  result = { code, tempScores: temp, humidScores: humid, type: TYPES[code] };
+}
+
+// Преобразование внутреннего кода в отображаемый по таблице:
+// Х + С/О/В => ХС/ХО/ХВ
+// О(нейтральная температура внутри кода) + С/О/В => ГС/ГО/ГВ
+// Г(жаркая температура внутри кода) + С/О/В => ЖС/ЖО/ЖВ
+// Внутренние коды НЕ менять: меняется только отображение для UI/промта.
+function displayCode(c) {
+  const tempMap = { 'О': 'Г', 'Г': 'Ж' };
+  return (tempMap[c[0]] || c[0]) + c[1];
+}
+
+function buildPrompt() {
+  const t = result.type;
+  return `Я определил свою натуру как «${t.name}» (код ${displayCode(result.code)}).
+
+ХАРАКТЕРИСТИКА ТИПА:
+${t.desc}
+
+ОСНОВНОЙ ПРИНЦИП ПИТАНИЯ:
+${t.needs}
+
+ПОДХОДЯЩИЕ ПРОДУКТЫ:
+${t.good}
+
+ПРОДУКТЫ, КОТОРЫХ СТОИТ ИЗБЕГАТЬ:
+${t.avoid}
+
+МОИ ПАРАМЕТРЫ:
+— Возраст: ${userParams.age || '[укажи]'}
+— Пол: ${userParams.gender || '[укажи]'}
+— Активность: ${userParams.activity || '[сидячая / умеренная / высокая]'}
+— Цель: ${userParams.goal || '[поддержание / снижение веса / здоровье]'}
+— Аллергии и непереносимости: ${userParams.allergies || 'нет'}
+— Сезон/климат: ${userParams.season || '[укажи]'}
+
+ЗАДАЧА:
+Составьте для меня индивидуальное меню на 1 день (завтрак, обед, ужин и 1–2 перекуса) по принципам традиционной медицины с учётом моей натуры. Каждое блюдо коротко обоснуйте: почему именно оно подходит моему типу (баланс температуры и влажности продуктов). Дайте практичные рецепты — не абстрактные «съешьте овощи», а конкретные блюда с примерным граммажом и способом приготовления.`;
+}
+
+function escapeHtml(s) { return s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+function renderResult() {
+  const t = result.type;
+  const screen = document.getElementById('screen-result');
+  
+  const tempLabels = { Х: 'Холодная', О: 'Нейтральная', Г: 'Жаркая' };
+  const humidLabels = { С: 'Сухая', О: 'Нейтральная', В: 'Влажная' };
+  const tempNames = { Х: 'Холодная', О: 'Нейтральная', Г: 'Жаркая' };
+  const humidNames = { С: 'Сухая', О: 'Нейтральная', В: 'Влажная' };
+  
+  const tempBoxes = ['Х','О','Г'].map(k => `
+    <div class="score-box ${result.code[0] === k ? 'active' : ''}">
+      <div class="score-letter">${tempLabels[k]}</div>
+      <div class="score-num">${result.tempScores[k]}</div>
+    </div>
+  `).join('');
+  
+  const humidBoxes = ['С','О','В'].map(k => `
+    <div class="score-box ${result.code[1] === k ? 'active' : ''}">
+      <div class="score-letter">${humidLabels[k]}</div>
+      <div class="score-num">${result.humidScores[k]}</div>
+    </div>
+  `).join('');
+  
+  screen.innerHTML = `
+    <div class="result-top">
+      <div class="result-top-dot" aria-hidden="true"></div>
+      <div class="result-title-band">Ваша натура</div>
+    </div>
+
+    <div class="scores-row">${tempBoxes}</div>
+    <div class="scores-row">${humidBoxes}</div>
+
+    <button id="reveal-type-btn" class="btn-primary" onclick="revealType(this)">Узнать тип</button>
+
+    <div id="type-details" class="hidden">
+      <div class="result-type-icon" aria-hidden="true"><span>${t.symbol}</span></div>
+      <h1 class="result-name"><span class="ln_"><span class="ln ln-d1">${t.name}</span></span></h1>
+      <p class="result-poetic"><span class="ln_"><span class="ln ln-d2">«${t.poetic}»</span></span></p>
+      <div class="result-combo"><span class="ln_"><span class="ln ln-d3">${tempNames[result.code[0]]} <span class="result-combo-plus">+</span> ${humidNames[result.code[1]]}</span></span></div>
+
+      <div class="card">
+        <div class="card-label">Суть типа</div>
+        <div class="card-text">${t.desc}</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Принцип питания</div>
+        <div class="card-text">${t.needs}</div>
+      </div>
+      <div class="card">
+        <div class="card-label">✓ Подходит</div>
+        <div class="card-text">${t.good}</div>
+      </div>
+      <div class="card">
+        <div class="card-label">✕ Избегать</div>
+        <div class="card-text">${t.avoid}</div>
+      </div>
+
+      <h2 class="section-title">Ваши параметры</h2>
+      <p style="font-size: 13px; color: #5A4E40; margin-bottom: 14px; line-height: 1.55;">
+        Заполните для точного меню. Можно оставить пустым — нейросеть составит общий вариант.
+      </p>
+
+      <div class="params-form">
+        <div class="form-group">
+          <label class="form-label" for="p-age">Возраст</label>
+          <input class="form-input" id="p-age" name="age" type="text" inputmode="numeric" pattern="\d{0,3}" maxlength="3" autocomplete="off" placeholder="например, 32">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="p-gender">Пол</label>
+          <input class="form-input" id="p-gender" name="gender" type="text" maxlength="40" autocomplete="sex" placeholder="мужской / женский">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="p-activity">Активность</label>
+          <input class="form-input" id="p-activity" name="activity" type="text" maxlength="60" autocomplete="off" placeholder="сидячая / умеренная / высокая">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="p-goal">Цель</label>
+          <input class="form-input" id="p-goal" name="goal" type="text" maxlength="80" autocomplete="off" placeholder="поддержание / снижение веса / здоровье">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="p-allergies">Аллергии / непереносимости</label>
+          <input class="form-input" id="p-allergies" name="allergies" type="text" maxlength="200" autocomplete="off" placeholder="например: лактоза, орехи">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="p-season">Сезон / климат</label>
+          <input class="form-input" id="p-season" name="season" type="text" maxlength="60" autocomplete="off" placeholder="например: зима, холодный климат">
+        </div>
+      </div>
+
+      <button id="determine-menu-btn" class="btn-primary" onclick="determineMenu(this)">Определить меню</button>
+
+      <div id="menu-output" class="hidden"></div>
+    </div>
+
+    <div class="footer-restart">
+      <button class="back-link" onclick="restart()">↻ Пройти заново</button>
+    </div>
+  `;
+  
+  // Sanitize + cap input on the JS side as a defence-in-depth backup,
+  // in case maxlength is bypassed via DevTools or large paste.
+  const INPUT_LIMITS = { age: 3, gender: 40, activity: 60, goal: 80, allergies: 200, season: 60 };
+  const sanitize = (k, raw) => {
+    let v = String(raw == null ? '' : raw);
+    v = v.replace(/[\u0000-\u001F\u007F]/g, ''); // strip control chars
+    if (k === 'age') v = v.replace(/\D/g, '');    // age = digits only
+    v = v.slice(0, INPUT_LIMITS[k] || 100);
+    return v;
+  };
+  ['age','gender','activity','goal','allergies','season'].forEach(k => {
+    const el = document.getElementById('p-' + k);
+    if (el) {
+      el.value = userParams[k];
+      el.addEventListener('input', e => {
+        const clean = sanitize(k, e.target.value);
+        if (clean !== e.target.value) e.target.value = clean;
+        userParams[k] = clean;
+      });
+      el.addEventListener('blur', e => {
+        const trimmed = sanitize(k, e.target.value).trim();
+        if (trimmed !== e.target.value) e.target.value = trimmed;
+        userParams[k] = trimmed;
+      });
+    }
+  });
+}
+
+function revealType(btn) {
+  // Pomelo panel-transition: button cross-fades out, block cross-fades in.
+  btn.classList.add('panel-transition');
+  void btn.offsetWidth;
+  btn.classList.add('is-hidden');
+  // Collapse height after fade so the layout doesn't have a phantom button.
+  const btnHeight = btn.offsetHeight;
+  setTimeout(() => {
+    btn.style.height = btnHeight + 'px';
+    btn.style.overflow = 'hidden';
+    btn.style.transition = 'height 0.35s var(--ease-material), margin 0.35s var(--ease-material), padding 0.35s var(--ease-material)';
+    btn.style.height = '0px';
+    btn.style.marginTop = '0';
+    btn.style.marginBottom = '0';
+    btn.style.paddingTop = '0';
+    btn.style.paddingBottom = '0';
+  }, 420);
+  setTimeout(() => {
+    btn.remove();
+    const block = document.getElementById('type-details');
+    if (!block) return;
+    block.classList.remove('hidden');
+    block.classList.remove('reveal-in', 'is-revealed');
+    void block.offsetWidth;
+    block.classList.add('reveal-in');
+    // Stagger the Obys-style line reveals one frame after the parent fade-in.
+    requestAnimationFrame(() => {
+      block.classList.add('is-revealed');
+    });
+    setTimeout(() => {
+      block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 140);
+  }, 770);
+}
+
+async function determineMenu(btn) {
+  btn.disabled = true;
+  btn.textContent = 'Готовим меню…';
+
+  // Заказчик подключает свою нейросеть здесь.
+  // Доступные данные:
+  //   result.code                — внутренний код (ХС/ХО/.../ГВ)
+  //   displayCode(result.code)   — отображаемый код (ХС/ЖС/...)
+  //   result.type                — {name, poetic, desc, needs, good, avoid, symbol}
+  //   result.tempScores          — {Х,О,Г} баллы по температуре
+  //   result.humidScores         — {С,О,В} баллы по влажности
+  //   userParams                 — {age, gender, activity, goal, allergies, season}
+  //   buildPrompt()              — собирает готовый текстовый промт
+  //
+  // Пример замены заглушки на реальный fetch:
+  //   const resp = await fetch('/api/menu', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({ code: result.code, params: userParams }),
+  //   });
+  //   const data = await resp.json();
+  //   document.getElementById('menu-output').textContent = data.menu;
+
+  setTimeout(() => {
+    const out = document.getElementById('menu-output');
+    if (out) {
+      out.innerHTML = `
+        <div class="card" style="margin-top: 14px;">
+          <div class="card-label">Меню</div>
+          <div class="card-text">Меню готовится по вашему типу и параметрам.<br>
+            Подключение нейросети — на стороне заказчика. Здесь появится индивидуальный план на день.</div>
+        </div>`;
+      out.classList.remove('hidden');
+      out.classList.add('fade-in');
+      out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    btn.textContent = 'Меню готово';
+  }, 700);
+}
+
+function restart() {
+  currentQ = 0;
+  answers = {};
+  result = null;
+  userParams = { age: '', gender: '', activity: '', goal: '', allergies: '', season: '' };
+  showScreen('intro');
+}
+
+// Dev-only: ?demo=ХС / ХО / ХВ / ОС / ОО / ОВ / ГС / ГО / ГВ
+// (internal codes; UI шапки покажут отображаемые). Skips the quiz, paints
+// the result screen directly. Add ?reveal=1 to also auto-open the type
+// details so the revealType animation plays on load.
+(function bootstrapDemo() {
+  const params = new URLSearchParams(window.location.search);
+  const demo = params.get('demo');
+  if (!demo) return;
+  if (!TYPES[demo]) { console.warn('demo: unknown type', demo); return; }
+  // Build synthetic scores that produce the requested code.
+  const temp = { Х: 0, О: 0, Г: 0 };
+  const humid = { С: 0, О: 0, В: 0 };
+  temp[demo[0]] = 9;
+  humid[demo[1]] = 9;
+  result = { code: demo, tempScores: temp, humidScores: humid, type: TYPES[demo] };
+  renderResult();
+  showScreen('result');
+  if (params.get('reveal') === '1') {
+    setTimeout(() => {
+      const btn = document.getElementById('reveal-type-btn');
+      if (btn) revealType(btn);
+    }, 400);
+  }
+})();
+</script>
+</body>
+</html>
